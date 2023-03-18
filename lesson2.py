@@ -5,7 +5,7 @@ class Window(tk.Tk):
         super().__init__()
         self.title("按鈕")
         hello_button = tk.Button(self, text="Say Hello", command=self.say_hello,width=50,height=10)
-        hello_button.pack(side=tk.LEFT, padx=(20, 20), pady=(20, 20))
+        hello_button.pack(side=tk.LEFT, padx=(30, 30), pady=(30, 30))
 
     def say_hello(self):
         print("Hello! elise")
