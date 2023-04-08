@@ -1,1 +1,1 @@
-iftttkey = "k6r43lLrHQY9at6CAUGSjFT8q8-ojxCdtGqglci5_Mq"
+iftttKey = "k6r43lLrHQY9at6CAUGSjFT8q8-ojxCdtGqglci5_Mq"
