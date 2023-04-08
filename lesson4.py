@@ -13,13 +13,27 @@ from signal import pause
 from gpiozero import RGBLED
 
 state = False
+counter = 0
 
 def user_press():
-    global state
+    global state,counter
     state = not state
+    
     if state == True:
         print("開燈")
-        led.color=(1,0,0)
+        counter += 1
+        if counter % 3 == 1:
+            led.color=(0,1,0)
+        elif counter % 3 == 2:
+            led.color=(0,0,1)
+        elif counter % 3 == 0:
+            led.color=(1,0,0)
+            url = f'https://maker.ifttt.com/trigger/button_pressed/with/key/{private.iftttKey}?value1=danger&value2=100'
+
+            r = requests.get(url)
+            if r.status_code == 200:
+                print("發送成功")
+
     else:
         print("關燈")
         led.color=(0,0,0)
@@ -30,6 +44,12 @@ led = RGBLED(red=17, green=27, blue=22)
 button.when_pressed = user_press
 
 pause()
+
+
+
+
+
+
 
 
 
