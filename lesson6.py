@@ -7,4 +7,7 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://raspberrytest-9d922-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
 ref = db.reference('/mfrc')
-print(ref.get())
+#print(ref.get())
+ref.update({
+    'id': 'Hello! Raspberry!'
+})
