@@ -24,6 +24,9 @@
 import RPi.GPIO as GPIO
 import mfrc522 as MFRC522
 import signal
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 continue_reading = True
 
@@ -41,6 +44,12 @@ signal.signal(signal.SIGINT, end_read)
 MIFAREReader = MFRC522.MFRC522()
 
 # Welcome message
+cred = credentials.Certificate("raspberrytest-9d922-firebase-adminsdk-8zzyt-a986bb6929.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://raspberrytest-9d922-default-rtdb.asia-southeast1.firebasedatabase.app/'
+})
+ref = db.reference('/mfrc')
+#print(ref.get())
 print ("Welcome to the MFRC522 data read example")
 print ("Press Ctrl-C to stop.")
 
@@ -62,6 +71,9 @@ while continue_reading:
 
         # Print UID
         print ("Card read UID: %s,%s,%s,%s" % (uid[0], uid[1], uid[2], uid[3]))
+        ref.update({
+            'id': '%s,%s,%s,%s' % (uid[0], uid[1], uid[2], uid[3])
+        })
     
         # This is the default key for authentication
         key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
